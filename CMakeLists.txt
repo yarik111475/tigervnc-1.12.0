@@ -151,7 +151,7 @@ find_package(ZLIB REQUIRED)
 find_package(Pixman REQUIRED)
 
 # Check for gettext
-option(ENABLE_NLS "Enable translation of program messages" ON)
+option(ENABLE_NLS "Enable translation of program messages" OFF)
 if(ENABLE_NLS)
   # Tools
   find_package(Gettext)
@@ -265,7 +265,7 @@ if(BUILD_VIEWER)
 endif()
 
 # Check for GNUTLS library
-option(ENABLE_GNUTLS "Enable protocol encryption and advanced authentication" ON)
+option(ENABLE_GNUTLS "Enable protocol encryption and advanced authentication" OFF)
 if(ENABLE_GNUTLS)
   find_package(GnuTLS)
   if (GNUTLS_FOUND)
