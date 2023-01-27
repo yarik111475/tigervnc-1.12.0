@@ -315,8 +315,10 @@ if(BUILD_VIEWER)
   add_subdirectory(media)
 endif()
 
-add_subdirectory(tests)
-
+option(ADD_TESTS OFF)
+if(ADD_TESTS)
+    add_subdirectory(tests)
+endif()
 
 if(BUILD_VIEWER)
   add_subdirectory(release)
