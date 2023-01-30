@@ -2,6 +2,18 @@
 # Setup
 #
 
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
+if(LINUX)
+    set(LINUX_LINK_STATIC
+        -static-libgcc
+        -static-libstdc++
+        -pthread
+    )
+endif()
+
 cmake_minimum_required(VERSION 2.8.11)
 if(POLICY CMP0022)
   cmake_policy(SET CMP0022 OLD)

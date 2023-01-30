@@ -4,6 +4,21 @@ include_directories(${CMAKE_SOURCE_DIR}/unix/tx)
 include_directories(${CMAKE_SOURCE_DIR}/unix)
 include_directories(${CMAKE_SOURCE_DIR}/common)
 
+#RPATH
+# use, i.e. don't skip the full RPATH for the build tree
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
+
+# when building, don't use the install RPATH already
+# (but later on when installing)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+
+set(CMAKE_INSTALL_RPATH "/lib")
+message(${CMAKE_INSTALL_RPATH})
+
+# add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the install RPATH
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
 add_executable(x0vncserver
   buildtime.c
   Geometry.cxx
@@ -50,7 +65,7 @@ else()
   message(WARNING "No Xrandr extension.  x0vncserver will not be able to resize session.")
 endif()
 
-target_link_libraries(x0vncserver ${X11_LIBRARIES})
+target_link_libraries(x0vncserver ${X11_LIBRARIES} ${LIBJPEG})
 
 install(TARGETS x0vncserver DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})
 install(FILES x0vncserver.man DESTINATION ${CMAKE_INSTALL_FULL_MANDIR}/man1 RENAME x0vncserver.1)
